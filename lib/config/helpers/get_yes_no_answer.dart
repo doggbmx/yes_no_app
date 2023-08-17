@@ -7,12 +7,8 @@ class GetYesNoAnswer {
   Future<Message> getAnswer() async {
     final response = await _dio.get('https://yesno.wtf/api');
 
-    final yesNo = YesNoModel.fromJsonMap(response.data);
+    final yesNo = YesNoModel.fromJson(response.data);
 
-    return Message(
-      text: yesNo.answer,
-      fromWho: FromWho.hers,
-      imageUrl: yesNo.imageUrl,
-    );
+    return yesNo.toMessageEntity();
   }
 }
